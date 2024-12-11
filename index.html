@@ -201,159 +201,65 @@
 
                 const navLinks = document.querySelectorAll('nav ul li a');
 
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.forEach(link => link.classList.remove('active'));
-    link.classList.add('active');
-  });
-});
+                navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                 navLinks.forEach(link => link.classList.remove('active'));
+                link.classList.add('active');
+                 });
+                });
 
 
 
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the image and the modal image
-    var images = document.getElementsByClassName("portfolio-image");
-    var modalImg = document.getElementById("fullSizeImage");
-
-    // Get the close button
-    var closeBtn = document.getElementById("closeModal");
-
-    // Loop through all images
-    for (let image of images) {
-        image.onclick = function() {
-            modal.style.display = "block";
-            modalImg.src = this.src; // Set the clicked image as the source for the modal image
-        }
-    }
-    // Get the modal
+    // Get the modal and related elements
 var modal = document.getElementById("myModal");
-
-// Get the images and modal image
-var images = document.getElementsByClassName("portfolio-image");
 var modalImg = document.getElementById("fullSizeImage");
-
-// Get the close button
 var closeBtn = document.getElementById("closeModal");
-
-// Get the previous and next buttons
 var prevBtn = document.getElementById("prev");
 var nextBtn = document.getElementById("next");
+var navHeader = document.getElementById("header");
 
-// Array to hold all the image sources
-var imageArray = [];
-for (let image of images) {
-    imageArray.push(image.src);
-}
+// Get all the images and store them in an array
+var images = document.getElementsByClassName("portfolio-image");
+var imageArray = Array.from(images).map(image => image.src);
 
+// Track the current image index
 var currentIndex = 0;
 
-// Open the modal when an image is clicked
+// Open the modal and set the clicked image when any image is clicked
 for (let i = 0; i < images.length; i++) {
     images[i].onclick = function() {
-        modal.style.display = "block";
-        modalImg.src = imageArray[i]; // Set the clicked image as the source for the modal image
-        currentIndex = i;
+        modal.style.display = "block";  // Show the modal
+        modalImg.src = imageArray[i];  // Set the clicked image as the modal image
+        currentIndex = i;  // Update the current index
+        navHeader.classList.add("fade-out");  // Fade out the navigation header
     }
 }
 
 // Close the modal when the close button is clicked
 closeBtn.onclick = function() {
-    modal.style.display = "none";
+    modal.style.display = "none";  // Hide the modal
+    navHeader.classList.remove("fade-out");  // Remove the fade-out effect from the navbar
 }
 
 // Navigate to the previous image
 prevBtn.onclick = function() {
-    currentIndex = (currentIndex === 0) ? imageArray.length - 1 : currentIndex - 1;
-    modalImg.src = imageArray[currentIndex];
+    currentIndex = (currentIndex === 0) ? imageArray.length - 1 : currentIndex - 1;  // Loop to last image
+    modalImg.src = imageArray[currentIndex];  // Update the modal image
 }
 
 // Navigate to the next image
 nextBtn.onclick = function() {
-    currentIndex = (currentIndex === imageArray.length - 1) ? 0 : currentIndex + 1;
-    modalImg.src = imageArray[currentIndex];
+    currentIndex = (currentIndex === imageArray.length - 1) ? 0 : currentIndex + 1;  // Loop to first image
+    modalImg.src = imageArray[currentIndex];  // Update the modal image
 }
 
-
-    // When the user clicks on the close button, close the modal
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
-    }
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the image and modal image
-var images = document.getElementsByClassName("portfolio-image");
-var modalImg = document.getElementById("fullSizeImage");
-
-// Get the close button
-var closeBtn = document.getElementById("closeModal");
-
-// Get the navbar
-var navHeader = document.getElementById("header");
-
-// Loop through all images
-for (let image of images) {
-    image.onclick = function() {
-        modal.style.display = "block";  // Show modal
-        modalImg.src = this.src;  // Set the clicked image as the source for the modal image
-        navHeader.classList.add("fade-out");  // Fade out the navigation
-    }
-}
-
-// When the user clicks on the close button, close the modal and fade the navbar back in
-closeBtn.onclick = function() {
-    modal.style.display = "none";  // Hide modal
-    navHeader.classList.remove("fade-out");  // Restore the navigation bar (remove fade)
-}
-
-// Optional: Close the modal if the user clicks anywhere outside the image
+// Close the modal if the user clicks outside of the modal content
 window.onclick = function(event) {
     if (event.target === modal) {
-        modal.style.display = "none";  // Hide modal
-        navHeader.classList.remove("fade-out");  // Restore the navigation bar (remove fade)
+        modal.style.display = "none";  // Close the modal
+        navHeader.classList.remove("fade-out");  // Remove the fade-out effect from the navbar
     }
 }
-
-document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form from refreshing the page
-
-    (function() {
-    emailjs.init("riekozo");  // Replace "your_user_id" with your actual EmailJS user ID
-})();
-
-document.getElementById("contactForm").addEventListener("submit", function(event) {
-    event.preventDefault();  // Prevent the form from submitting the traditional way
-
-    // Get the form data
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var phone = document.getElementById("phone").value;
-    var message = document.getElementById("message").value;
-
-    // Define the template parameters to be sent in the email
-    var templateParams = {
-        name: name,
-        email: email,
-        phone: phone,
-        message: message
-    };
-
-    // Send the email through EmailJS
-    emailjs.send("service_riekozo, "template_riekozo", templateParams)
-        .then(function(response) {
-            alert("Message sent successfully!");
-        }, function(error) {
-            alert("Failed to send message: " + JSON.stringify(error));
-        });
-});
-
-
-
-
-
-
-
-            </script>
+s
+                   </script>
         </body>
